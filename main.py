@@ -9,4 +9,3 @@ df = pd.read_excel(
 limit_list = df["UPS zone ranges"]
 for limit in limit_list:
     lowest_limit = limit.replace("-", " ").split(" ")[0]
-
