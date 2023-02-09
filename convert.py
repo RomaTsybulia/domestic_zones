@@ -55,6 +55,8 @@ def convert_files():
     download_link = download_link.get_attribute("href")
     driver.get(download_link)
 
+    driver.close()
+
 
 if __name__ == "__main__":
     convert_files()
