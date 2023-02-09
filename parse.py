@@ -43,4 +43,3 @@ if __name__ == "__main__":
     ups_list = ["0500", "01000"]
     get_path_for_xls_files()
 
-
