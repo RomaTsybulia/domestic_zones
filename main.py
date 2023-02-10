@@ -2,6 +2,7 @@ import pandas as pd
 
 from convert import convert_files
 from parse import get_files
+from zip_unpacker import zip_unpacker
 
 
 def main():
@@ -19,6 +20,7 @@ def main():
 
     get_files(formated_limit_list)
     convert_files()
+    zip_unpacker()
 
 
 
