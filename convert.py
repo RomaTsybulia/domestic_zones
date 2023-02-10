@@ -38,22 +38,29 @@ def convert_files():
     ]
 
     driver = webdriver.Chrome(options=options)
-    driver.get(BASE_URL)
 
-    input_field = driver.find_element(By.CLASS_NAME, "upload-file-input")
-    input_field.send_keys(files[0])
+    while files:
+        driver.get(BASE_URL)
+        input_field = driver.find_element(By.CLASS_NAME, "upload-file-input")
 
-    for file in files:
-        input_field.send_keys(file)
+        if len(files) >= 10:
+            for _ in range(10):
+                input_field.send_keys(files.pop())
+        else:
 
-    convert_button = driver.find_element(By.ID, "uploadButton")
-    convert_button.click()
+            for _ in range(len(files)):
+                input_field.send_keys(files.pop())
 
-    download_link = WebDriverWait(driver, 20).until(
-        EC.element_to_be_clickable((By.ID, "DownloadButton"))
-    )
-    download_link = download_link.get_attribute("href")
-    driver.get(download_link)
+        convert_button = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.ID, "uploadButton"))
+        )
+        convert_button.click()
+
+        download_link = WebDriverWait(driver, 90).until(
+            EC.element_to_be_clickable((By.ID, "DownloadButton"))
+        )
+        download_link = download_link.get_attribute("href")
+        driver.get(download_link)
 
     driver.close()
 
